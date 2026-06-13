@@ -1,0 +1,71 @@
+[package]
+versioned_files = [
+    { path = "Build/Build.csproj", regex = '<PackageVersion>(?<version>\d+\.\d+\.\d+)</PackageVersion>' },
+]
+changelog = "CHANGELOG.md"
+assets = "release-assets/*"
+extra_changelog_sections = [
+    { name = "Changes", types = [
+        "patch",
+    ] },
+    { name = "Documentation", types = [
+        "docs",
+    ] },
+    { name = "Notes", types = [
+        "note",
+    ] },
+]
+
+[changes]
+ignore_conventional_commits = true
+
+[[workflows]]
+name = "prepare-release"
+
+[[workflows.steps]]
+type = "Command"
+command = "git switch -c release"
+
+[[workflows.steps]]
+type = "PrepareRelease"
+
+[[workflows.steps]]
+type = "Command"
+command = "git commit -m \"chore: prepare release $version\""
+
+[[workflows.steps]]
+type = "Command"
+command = "git push --force --set-upstream origin release"
+
+[[workflows.steps]]
+type = "CreatePullRequest"
+base = "main"
+
+[workflows.steps.title]
+template = "chore: prepare release $version"
+
+[workflows.steps.body]
+template = "Merging this PR publishes the release.\n\n$changelog"
+
+[[workflows]]
+name = "release"
+
+[[workflows.steps]]
+type = "Release"
+
+[[workflows]]
+name = "document-change"
+
+[[workflows.steps]]
+type = "CreateChangeFile"
+
+[github]
+owner = "hazre"
+repo = "BepInExPack-GoblinCleanup"
+
+[release_notes]
+change_templates = [
+    "* $summary by @$pr_author_login in #$pr_number",
+    "* $summary by @$pr_author_login",
+    "* $summary",
+]

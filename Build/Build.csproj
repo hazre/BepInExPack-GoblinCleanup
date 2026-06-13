@@ -1,0 +1,17 @@
+<Project Sdk="Cake.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)/..</RunWorkingDirectory>
+    <PackageVersion>5.4.235001</PackageVersion>
+    <UnityVersion>2023.2.22f1</UnityVersion>
+    <UnityHubDir>C:\Program Files\Unity\Hub\Editor</UnityHubDir>
+    <GameDir>C:\Program Files (x86)\Steam\steamapps\common\Goblin Cleanup</GameDir>
+    <!-- Thunderstore package version in Major.Minor.PatchPP format.
+         BepInEx 5.4.23.5 + package patch 001 = 5.4.235001.
+         Knope manages the patch suffix (last 3 digits).
+         Default paths can be overridden via -p:UnityVersion=... -p:UnityHubDir=... -p:GameDir=... -->
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Mono.Cecil" Version="0.11.6" />
+  </ItemGroup>
+</Project>

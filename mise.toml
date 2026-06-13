@@ -1,0 +1,34 @@
+[settings]
+idiomatic_version_file_enable_tools = ["dotnet"]
+experimental = true
+
+[hooks]
+enter = "dotnet tool restore"
+
+[tasks.restore]
+description = "Restore dotnet tools"
+run = "dotnet tool restore"
+
+[tasks.prepare-unstripped]
+description = "Generate UnstrippedCorlib from Unity build support (overrides game's stripped assemblies)"
+run = "dotnet run --project Build/Build.csproj -- --target Prepare-UnstrippedCorlib"
+
+[tasks.build]
+description = "Build the Thunderstore package"
+run = "dotnet run --project Build/Build.csproj"
+
+[tasks.get-version]
+description = "Print the current package version"
+run = "dotnet msbuild Build/Build.csproj -getProperty:PackageVersion"
+
+[tasks.pin-actions]
+description = "Pin GitHub Actions to SHA commit hashes"
+run = "mise exec pinact@4.1.0 -- pinact run -u"
+
+[tasks.audit-actions]
+description = "Audit GitHub Actions for security issues"
+run = "mise exec zizmor@1.25.2 -- zizmor .github/workflows"
+
+[tools]
+cargo-binstall = "1.19.1"
+"cargo:knope" = "0.23.0"

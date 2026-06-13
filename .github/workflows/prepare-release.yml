@@ -1,0 +1,83 @@
+name: Create Release PR
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  prepare-release:
+    if: "!contains(github.event.head_commit.message, 'chore: prepare release')"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Generate bot token
+        id: generate-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.APP_CLIENT_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Get GitHub App User ID
+        id: get-user-id
+        run: echo "user-id=$(gh api "/users/${STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG: ${{ steps.generate-token.outputs.app-slug }}
+
+      - name: Configure Git as bot user
+        run: |
+          git config --global user.name "${STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG}[bot]"
+          git config --global user.email "${STEPS_GET_USER_ID_OUTPUTS_USER_ID}+${STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG}[bot]@users.noreply.github.com"
+          gh auth setup-git
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG: ${{ steps.generate-token.outputs.app-slug }}
+          STEPS_GET_USER_ID_OUTPUTS_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
+
+      - uses: jdx/mise-action@dba19683ed58901619b14f395a24841710cb4925 # v4.1.0
+
+      - name: Prepare Release
+        id: prepare-release
+        run: |
+          version="$(mise run get-version)"
+          has_tag="$(git tag -l "v$version" | head -1)"
+
+          log_file="$(mktemp)"
+          set +e
+          if [ -n "$has_tag" ]; then
+            knope prepare-release --verbose >"$log_file" 2>&1
+          else
+            knope prepare-release --verbose --override-version "$version" >"$log_file" 2>&1
+          fi
+          status=$?
+          set -e
+          cat "$log_file"
+
+          if [ "$status" -eq 0 ]; then
+            echo "release_created=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if grep -qE 'No packages are ready to release|releases::no_release' "$log_file"; then
+            echo "release_created=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          exit "$status"
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - name: Push release branch
+        if: steps.prepare-release.outputs.release_created == 'true'
+        run: git push --force --set-upstream origin release

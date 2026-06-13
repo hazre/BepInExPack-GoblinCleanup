@@ -1,0 +1,26 @@
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+namespace = "GoblinCleanupModding"
+name = "BepInExPack_GoblinCleanup"
+description = "BepInEx modloader, preconfigured and ready to use for Goblin Cleanup"
+websiteUrl = "https://github.com/hazre/BepInExPack-GoblinCleanup"
+containsNsfwContent = false
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./dist"
+
+[[build.copy]]
+source = "./dist/BepInEx"
+target = "/BepInExPack"
+
+[[build.copy]]
+source = "./CHANGELOG.md"
+target = "/"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["goblincleanup"]
