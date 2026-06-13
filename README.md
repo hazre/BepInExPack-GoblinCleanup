@@ -14,7 +14,7 @@ Includes unstripped corlib files to replace the game's stripped Mono runtime ass
 
 ## Installation (Manual)
 1. Install the latest release via [Thunderstore](https://thunderstore.io/c/goblincleanup/) or download the ZIP from the [Releases](https://github.com/hazre/BepInExPack-GoblinCleanup/releases) page.
-2. Extract the ZIP and copy the `BepInExPack` directory to your Goblin Cleanup installation folder:
+2. Extract the ZIP and copy the contents of `BepInExPack` directory to your Goblin Cleanup installation folder:
    - **Default location:** `C:\Program Files (x86)\Steam\steamapps\common\Goblin Cleanup\`
 3. Start the game. BepInEx will load automatically. Mods can be added to `BepInEx/plugins/`.
 
