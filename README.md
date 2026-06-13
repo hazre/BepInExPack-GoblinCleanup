@@ -1,7 +1,14 @@
-# BepInExPack Goblin Cleanup
-[![Thunderstore Badge](https://modding.resonite.net/assets/available-on-thunderstore.svg)](https://thunderstore.io/c/goblincleanup/)
+<table>
+  <tr>
+    <td><img src="icon.png" width="96" alt="More Players icon"></td>
+    <td>
+      <h1>BepInExPack Goblin Cleanup</h1>
+      <p>BepInEx 5.4.23.5, preconfigured and ready to use for <a href="https://store.steampowered.com/app/2750010">Goblin Cleanup</a></p>
+    </td>
+  </tr>
+</table>
 
-BepInEx 5.4.23.5, preconfigured and ready to use for [Goblin Cleanup](https://store.steampowered.com/app/2748340/Goblin_Cleanup/).
+[![Thunderstore Badge](https://modding.resonite.net/assets/available-on-thunderstore.svg)](https://thunderstore.io/c/goblincleanup/)
 
 Includes unstripped corlib files to replace the game's stripped Mono runtime assemblies, and patches `doorstop_config.ini` to load from `UnstrippedCorlib` before the game's `Managed` directory.
 
