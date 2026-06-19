@@ -3,7 +3,7 @@ versioned_files = [
     { path = "Build/Build.csproj", regex = '<PackageVersion>(?<version>\d+\.\d+\.\d+)</PackageVersion>' },
 ]
 changelog = "CHANGELOG.md"
-assets = "release-assets/*"
+assets = "dist/*.zip"
 extra_changelog_sections = [
     { name = "Changes", types = [
         "patch",

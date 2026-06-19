@@ -14,7 +14,7 @@ readme = "./README.md"
 outdir = "./dist"
 
 [[build.copy]]
-source = "./dist/BepInEx"
+source = "./.build/BepInEx"
 target = "/BepInExPack"
 
 [[build.copy]]

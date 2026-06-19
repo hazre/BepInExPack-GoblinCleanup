@@ -36,10 +36,6 @@ jobs:
       - name: Build Thunderstore package
         run: mise run build
 
-      - name: Prepare release assets
-        run: mkdir -p release-assets && cp dist/*.zip release-assets/
-        shell: bash
-
       - name: Create GitHub release
         run: knope release --verbose
         env:

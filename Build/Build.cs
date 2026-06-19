@@ -4,9 +4,10 @@ var bepInExVersion = XmlPeek("./Directory.Build.props", "/Project/PropertyGroup/
 var packageVersion = XmlPeek("./Build/Build.csproj", "/Project/PropertyGroup/PackageVersion");
 
 var distDir = Directory("./dist");
-var extractDir = distDir + Directory("BepInEx");
+var tempDir = Directory("./.build");
+var extractDir = tempDir + Directory("BepInEx");
 var downloadUrl = $"https://github.com/BepInEx/BepInEx/releases/download/v{bepInExVersion}/BepInEx_win_x64_{bepInExVersion}.zip";
-var zipFile = distDir + File($"BepInEx_win_x64_{bepInExVersion}.zip");
+var zipFile = tempDir + File($"BepInEx_win_x64_{bepInExVersion}.zip");
 
 void EnsureClean(DirectoryPath dir)
 {
@@ -18,6 +19,7 @@ Task("Clean")
     .Does(() =>
 {
     EnsureClean(distDir);
+    EnsureClean(tempDir);
 });
 
 Task("DownloadBepInEx")

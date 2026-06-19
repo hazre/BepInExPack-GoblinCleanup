@@ -484,4 +484,5 @@ $RECYCLE.BIN/
 *.swp
 
 # Thunderstore packaging
+.build/
 dist/
