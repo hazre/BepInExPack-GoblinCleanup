@@ -57,8 +57,13 @@ Task("Configure")
     {
         var path = doorstopConfig.ToString();
         var content = System.IO.File.ReadAllText(path);
-        content = content.Replace("dll_search_path_override=", "dll_search_path_override=UnstrippedCorlib");
+        content = content.Replace("dll_search_path_override =", "dll_search_path_override = UnstrippedCorlib");
         System.IO.File.WriteAllText(path, content);
+        var finalContent = System.IO.File.ReadAllText(path);
+        if (!finalContent.Contains("dll_search_path_override = UnstrippedCorlib"))
+        {
+            throw new Exception("Failed to patch doorstop_config.ini: dll_search_path_override=UnstrippedCorlib not found after write");
+        }
         Information("Patched doorstop_config.ini: dll_search_path_override = UnstrippedCorlib");
     }
 
