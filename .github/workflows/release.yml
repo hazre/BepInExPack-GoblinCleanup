@@ -64,6 +64,11 @@ jobs:
           name: thunderstore-package
           path: dist/
 
+      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+
+      - name: Restore dotnet tools
+        run: mise run restore
+
       - name: Publish to Thunderstore
         run: |
           ZIP_FILE=$(ls dist/*.zip | head -1)
