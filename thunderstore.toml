@@ -23,4 +23,7 @@ target = "/"
 
 [publish]
 repository = "https://thunderstore.io"
-communities = ["goblincleanup"]
+communities = ["goblin-cleanup"]
+
+[publish.categories]
+resonite = ["libraries"]
