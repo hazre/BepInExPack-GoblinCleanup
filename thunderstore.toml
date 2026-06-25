@@ -28,4 +28,4 @@ repository = "https://thunderstore.io"
 communities = ["goblin-cleanup"]
 
 [publish.categories]
-resonite = ["libraries"]
+goblin-cleanup = ["libraries"]
