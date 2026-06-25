@@ -8,6 +8,8 @@ description = "BepInEx modloader, preconfigured and ready to use for Goblin Clea
 websiteUrl = "https://github.com/hazre/BepInExPack-GoblinCleanup"
 containsNsfwContent = false
 
+[package.dependencies]
+
 [build]
 icon = "./icon.png"
 readme = "./README.md"
