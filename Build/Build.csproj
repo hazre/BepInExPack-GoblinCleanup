@@ -2,14 +2,13 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <RunWorkingDirectory>$(MSBuildProjectDirectory)/..</RunWorkingDirectory>
-    <PackageVersion>5.4.235001</PackageVersion>
+    <PackageVersion>5.4.230501</PackageVersion>
     <UnityVersion>2023.2.22f1</UnityVersion>
     <UnityHubDir>C:\Program Files\Unity\Hub\Editor</UnityHubDir>
     <GameDir>C:\Program Files (x86)\Steam\steamapps\common\Goblin Cleanup</GameDir>
-    <!-- Thunderstore package version in Major.Minor.PatchPP format.
-         BepInEx 5.4.23.5 + package patch 001 = 5.4.235001.
-         Knope manages the patch suffix (last 3 digits).
-         Default paths can be overridden via -p:UnityVersion=... -p:UnityHubDir=... -p:GameDir=... -->
+    <!-- Package version: Major.Minor.BepInExPatch(2d)BepInExBuild(2d)PackPatch(2d).
+         e.g. BepInEx 5.4.23.5 → remove dot → 5.4.2305 + pack patch 01 = 5.4.230501.
+         Knope manages the pack patch suffix (last 2 digits). -->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Mono.Cecil" Version="0.11.6" />

@@ -73,6 +73,11 @@ Task("Configure")
     CreateDirectory(unstrippedTarget);
     CopyDirectory("./UnstrippedCorlib", unstrippedTarget);
     Information("Copied UnstrippedCorlib DLLs");
+
+    var configDir = extractDir + Directory("BepInEx") + Directory("config");
+    CreateDirectory(configDir);
+    CopyFile("./BepInEx/config/BepInEx.cfg", configDir + File("BepInEx.cfg"));
+    Information("Copied BepInEx.cfg");
 });
 
 Task("PrintVersion")
