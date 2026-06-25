@@ -1,5 +1,0 @@
----
-default: note
----
-
-# initial version
