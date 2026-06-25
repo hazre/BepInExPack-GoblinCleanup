@@ -1,19 +1,37 @@
 <table>
   <tr>
-    <td><img src="icon.png" width="96" alt="More Players icon"></td>
+    <td><img src="https://raw.githubusercontent.com/hazre/BepInExPack-GoblinCleanup/refs/heads/main/icon.png" width="96" alt="BepInExPack Goblin Cleanup icon"></td>
     <td>
       <h1>BepInExPack Goblin Cleanup</h1>
-      <p>BepInEx 5.4.23.5, preconfigured and ready to use for <a href="https://store.steampowered.com/app/2750010">Goblin Cleanup</a></p>
+      <p>BepInEx modloader, preconfigured and ready to use for <a href="https://store.steampowered.com/app/2748340/Goblin_Cleanup/">Goblin Cleanup</a></p>
     </td>
   </tr>
 </table>
 
-[![Thunderstore Badge](https://modding.resonite.net/assets/available-on-thunderstore.svg)](https://thunderstore.io/c/goblincleanup/)
+[![Thunderstore Badge](https://modding.resonite.net/assets/available-on-thunderstore.svg)](https://thunderstore.io/c/goblin-cleanup/)
 
-Includes unstripped corlib files to replace the game's stripped Mono runtime assemblies, and patches `doorstop_config.ini` to load from `UnstrippedCorlib` before the game's `Managed` directory.
+This is [BepInEx 5.4.23.5](https://github.com/BepInEx/BepInEx) pack for [Goblin Cleanup](https://store.steampowered.com/app/2748340/Goblin_Cleanup/).
+
+The exact version is `BepInEx_win_x64_5.4.23.5.zip` from https://github.com/BepInEx/BepInEx/releases/tag/v5.4.23.5
+
+BepInEx is a general purpose framework for Unity modding.
+BepInEx includes tools and libraries to
+
+* load custom code (hereafter *plugins*) into the game on launch;
+* patch in-game methods, classes and even entire assemblies without touching original game files;
+* configure plugins and log game to desired outputs like console or file;
+* manage plugin dependencies.
+
+BepInEx is currently [one of the most popular modding tools for Unity on GitHub](https://github.com/topics/modding?o=desc&s=stars).
+
+## This pack's contents
+
+* `BepInExPack\UnstrippedCorlib\`'s corlib files sourced from Unity Editor 2023.2.22f1: `UnityEngine*.dll` from the non-dev player Managed directory, system assemblies from `MonoBleedingEdge\unityjit-win32`
+* `BepInExPack\doorstop_config.ini`'s `dllSearchPathOverride` set to `UnstrippedCorlib`
+* `BepInExPack\BepInEx\config\BepInEx.cfg`'s `HideManagerGameObject` set to true
 
 ## Installation (Manual)
-1. Install the latest release via [Thunderstore](https://thunderstore.io/c/goblincleanup/) or download the ZIP from the [Releases](https://github.com/hazre/BepInExPack-GoblinCleanup/releases) page.
+1. Install the latest release via [Thunderstore](https://thunderstore.io/c/goblin-cleanup/) or download the ZIP from the [Releases](https://github.com/hazre/BepInExPack-GoblinCleanup/releases) page.
 2. Extract the ZIP and copy the contents of `BepInExPack` directory to your Goblin Cleanup installation folder:
    - **Default location:** `C:\Program Files (x86)\Steam\steamapps\common\Goblin Cleanup\`
 3. Start the game. BepInEx will load automatically. Mods can be added to `BepInEx/plugins/`.
