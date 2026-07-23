@@ -45,7 +45,7 @@ jobs:
           STEPS_GENERATE_TOKEN_OUTPUTS_APP_SLUG: ${{ steps.generate-token.outputs.app-slug }}
           STEPS_GET_USER_ID_OUTPUTS_USER_ID: ${{ steps.get-user-id.outputs.user-id }}
 
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+      - uses: jdx/mise-action@dad1bfd3df957f44999b559dd69dc1671cb4e9ea # v4.2.1
 
       - name: Prepare Release
         id: prepare-release
